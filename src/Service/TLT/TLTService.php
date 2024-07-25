@@ -253,6 +253,11 @@ class TLTService
     return ['date' => date('d.m.Y', strtotime($TLT->dateBeginTLT)), 'time' => $TLT->timeBeginTLT];
   }
 
+  /**
+   * @param string $hspId
+   * @param string $patientId
+   * @return array
+   */
   public function getRowTLTByPatientForTable(string $hspId, string $patientId): array
   {
     $TLTArray = $this->getTLTByPatient($hspId, $patientId);
@@ -322,12 +327,15 @@ class TLTService
 
     foreach ($TLT as $item)
     {
-      if ($TLT->period !== 5 && $TLT->period !== 6 && $TLT->period !== 7 && $TLT->period !== 9 && $TLT->period !== 11 && $TLT->period !== 13 && $TLT->period !== 15 && $TLT->period !== 17 && $TLT->period !== 19 ) {
+      if ($TLT->period !== 5 && $TLT->period !== 6 && $TLT->period !== 7 && $TLT->period !== 9 && $TLT->period !== 11 
+        && $TLT->period !== 13 && $TLT->period !== 15 && $TLT->period !== 17 && $TLT->period !== 19) {
         if ($item === null || $item === '') {
           $result = false;
           break;
         }
+        
       } else {
+        
         if ( $TLT->adDias === null || $TLT->adSist === null || $TLT->inputAt === '') {
           $result = false;
           break;
@@ -406,4 +414,3 @@ class TLTService
     return null;
   }
 }
-
